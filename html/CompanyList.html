@@ -1,0 +1,57 @@
+<!-- IMPORT MODULE DETAIL -->
+<!-- 
+
+	Module : 	CompanyList
+	
+	Links : 	UserList
+					/users
+.				
+	
+	Nesteds : 	UserList
+					/users
+.				
+				
+-->
+<!-- /IMPORT MODULE DETAIL -->
+<div ng-controller="CompanyListController">
+	
+	<h1>CompanyList</h1>
+	
+	<!-- SEARCH FORM -->
+	<div class="well">
+	    <form name="form_search" class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="CompanyName">CompanyName</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.CompanyName" class="form-control" name="CompanyName" id="CompanyName" >
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- TABLE -->
+	<table class="table table-condensed table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>CompanyName</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in list | filter: {  CompanyName:search.CompanyName,  }">
+				<td ng-bind="item._id" ng-link="/companys/{{item._id}}"></td>
+				<td ng-bind="item.CompanyName"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="mb-20" ng-if="list.$resolved && (list | filter :{   CompanyName:search.CompanyName,  }).length == 0">
+        <b>No result found</b>
+    </div>
+
+	<!-- BUTTON -->
+	<button class="btn btn-primary" ng-link="/companys/new">New</button>
+	
+</div>
